@@ -6,5 +6,5 @@ CREATE TRIGGER update_quantity
 AFTER INSERT ON orders FOR EACH ROW
     -- Update the quantity based on the items in the new order
     UPDATE items
-    SET quantity = quantity - NEW.quantity
+    SET quantity = quantity - NEW.number
     WHERE item_id = NEW.item_id;
