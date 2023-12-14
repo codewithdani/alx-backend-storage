@@ -13,7 +13,7 @@ BEGIN
         RETURN 0;
     ELSE
         -- Return the result of the division
-        RETURN a / b;
+        RETURN (a *1.0)/ b;
     END IF;
 END //
 DELIMITER ;
