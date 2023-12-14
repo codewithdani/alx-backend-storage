@@ -1,7 +1,7 @@
 -- List bands with Glam rock as their main style, ranked by longevity
 SELECT
     band_name,
-    YEAR('2022-01-01') - YEAR(formed) AS lifespan
+    YEAR(2022) - YEAR(formed) AS lifespan
 FROM
     metal_bands
 WHERE
