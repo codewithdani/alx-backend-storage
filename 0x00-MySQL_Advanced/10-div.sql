@@ -6,7 +6,7 @@
 -- Create the function SafeDiv
 DELIMITER //
 CREATE FUNCTION SafeDiv(a INT, b INT)
-RETURNS INT
+RETURNS FLOAT
 BEGIN
     -- Check if the second number is equal to 0
     IF b = 0 THEN
