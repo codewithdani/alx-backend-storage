@@ -13,5 +13,5 @@ BEGIN
     GROUP BY u.id)
   AS AW
   SET u.average_score = AW.w_avg 
-  WHERE u.id=WA.id;
+  WHERE u.id=AW.id;
 END;
