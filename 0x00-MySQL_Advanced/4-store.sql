@@ -8,5 +8,5 @@ BEGIN
     -- Update the quantity based on the items in the new order
     UPDATE items
     SET quantity = quantity - NEW.quantity
-    WHERE name=NEW.item_name;
+    WHERE item_id = NEW.item_id;
 END;
