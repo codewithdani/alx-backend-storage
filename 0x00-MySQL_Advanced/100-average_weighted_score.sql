@@ -19,7 +19,7 @@ BEGIN
   INNER JOIN projects ON corrections.project_id = projects.id
   WHERE corrections.user_id = user_id;
 
-  IF tot_weight = 0 THEN
+  IF total_weight = 0 THEN
     UPDATE users
     SET users.average_score = 0
     WHERE users.id = user_id;
