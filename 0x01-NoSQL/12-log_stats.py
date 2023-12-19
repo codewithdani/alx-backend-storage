@@ -5,29 +5,22 @@ Display the total number of logs
 from pymongo import MongoClient
 
 
-METHODS = ["GET", "POST", "PUT", "PATCH", "DELETE"]
+def print_nginx_logs_stats(mongo_collection):
+   """  Display the total number of logs """
+    total_logs = mongo_collection.count_documents({})
+    print(f"{total_logs} logs where {total_logs} is the number of documents in this collection")
 
-
-def log_stats(mongo_collection, option=None):
-    """
-    Display the total number of logs
-    """
-    items = {}
-    if option:
-        value = mongo_collection.count_documents(
-            {"method": {"$regex": option}})
-        print(f"\tmethod {option}: {value}")
-        return
-
-    result = mongo_collection.count_documents(items)
-    print(f"{result} logs")
+   """  Display the count of logs for each HTTP method """
+    methods = ["GET", "POST", "PUT", "PATCH", "DELETE"]
     print("Methods:")
-    for method in METHODS:
-        log_stats(nginx_collection, method)
-    status_check = mongo_collection.count_documents({"path": "/status"})
-    print(f"{status_check} status check")
+    for method in methods:
+        count = mongo_collection.count_documents({"method": method})
+        print(f"\t{count} logs with method={method}")
+
+    """ Display the count of logs with method=GET and path=/status """
+    special_log_count = mongo_collection.count_documents({"method": "GET", "path": "/status"})
+    print(f"{special_log_count} logs with method=GET and path=/status")
 
 
-if __name__ == "__main__":
-    nginx_collection = MongoClient('mongodb://127.0.0.1:27017').logs.nginx
-    log_stats(nginx_collection)
+
+
