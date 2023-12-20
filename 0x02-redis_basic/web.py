@@ -15,8 +15,8 @@ def count_url_access(method: Callable) -> Callable:
     @wraps(method)
     def wrapper(url):
         """ The wrapper function for caching the output. """
-        redis_store.incr(f'count:{url}')
-        result = redis_store.get(f'result:{url}')
+        redis_client.incr(f'count:{url}')
+        result = redis_client.get(f'result:{url}')
         if result:
             return result.decode('utf-8')
         result = method(url)
