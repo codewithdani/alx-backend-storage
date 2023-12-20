@@ -23,7 +23,7 @@ class Cache:
         """ Get the data from Redis """
         data = self._redis.get(key)
         if fn:
-            data = fn(value)
+            data = fn(data)
         return data
 
     def get_str(self, key: str) -> str:
