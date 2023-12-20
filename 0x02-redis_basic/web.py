@@ -12,9 +12,11 @@ from typing import Callable
 store = redis.Redis()
 """The module-level Redis instance."""
 
+
 def cache_with_count(method: Callable) -> Callable:
     """
-    Decorator to cache the output of fetched data and track the number of accesses.
+    Decorator to cache the output of fetched data and
+    track the number of accesses.
     """
     @wraps(method)
     def wrapper(url: str) -> str:
@@ -31,10 +33,12 @@ def cache_with_count(method: Callable) -> Callable:
 
     return wrapper
 
+
 @cache_with_count
 def get_page(url: str) -> str:
     """
-    Returns the HTML content of a URL, caches the response, and tracks accesses.
+    Returns the HTML content of a URL, caches the response,
+    and tracks accesses.
     """
     response = requests.get(url)
     return response.text
