@@ -2,7 +2,7 @@
 """ Cache class in Python using the redis library: """
 from uuid import uuid4
 import redis
-from typing import Union
+from typing import Union, Callable
 
 
 class Cache:
@@ -17,3 +17,25 @@ class Cache:
         key = str(uuid4())
         self._redis.set(key, data)
         return key
+
+    def get(self, key: str,
+            fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
+        """ Get the data from Redis """
+        data = self._redis.get(key)
+        if fn:
+            data = fn(value)
+        return data
+
+    def get_str(self, key: str) -> str:
+        """ Convenience method for getting a string """
+        value = self._redis.get(key)
+        return value.decode("utf-8")
+
+    def get_int(self, key: str) -> int:
+        """ Convenience method for getting an integer """
+        data = self._redis.get(key)
+        try:
+            data = int(value.decode("utf-8"))
+        except Exception:
+            data = 0
+        return data
