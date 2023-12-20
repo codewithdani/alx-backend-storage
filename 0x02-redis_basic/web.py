@@ -6,6 +6,7 @@ from functools import wraps
 from typing import Callable
 
 redis_client = redis.Redis()
+""" The module-level Redis instance. """
 
 
 def count_url_access(method: Callable) -> Callable:
