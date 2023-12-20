@@ -13,7 +13,7 @@ def count_url_access(method: Callable) -> Callable:
     """ Decorator counting how many times
     a URL is accessed """
     @wraps(method)
-    def wrapper(url):
+    def wrapper(url) -> str:
         """ The wrapper function for caching the output. """
         redis_client.incr(f'count:{url}')
         result = redis_client.get(f'result:{url}')
@@ -21,7 +21,7 @@ def count_url_access(method: Callable) -> Callable:
             return result.decode('utf-8')
         result = method(url)
         redis_client.set(f'count:{url}', 0)
-        redis_client.set(f'result:{url}', 10, result)
+        redis_client.setex(f'result:{url}', 10, result)
         return result
     return wrapper
 
