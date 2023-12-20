@@ -42,3 +42,15 @@ def get_page(url: str) -> str:
     """
     response = requests.get(url)
     return response.text
+
+
+if __name__ == "__main__":
+    # Example usage:
+    url = "http://slowwly.robertomurray.co.uk/delay/5000/url/http://www.example.com"
+    page_content = get_page(url)
+    print(page_content)
+
+    # Retrieve and print the access count for the URL
+    count_key = f"count:{url}"
+    access_count = store.get(count_key)
+    print(f"Access count for {url}: {int(access_count)}")
