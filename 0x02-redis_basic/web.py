@@ -14,18 +14,15 @@ def count_url_access(method: Callable) -> Callable:
     a URL is accessed """
     @wraps(method)
     def wrapper(url):
-        cached_key = "cached:" + url
-        cached_data = redis_client.get(cached_key)
-        if cached_data:
-            return cached_data.decode("utf-8")
-
-        count_key = "count:" + url
-        html = method(url)
-
-        redis_client.incr(count_key)
-        redis_client.set(cached_key, html)
-        redis_client.expire(cached_key, 10)
-        return html
+        """ The wrapper function for caching the output. """
+        redis_store.incr(f'count:{url}')
+        result = redis_store.get(f'result:{url}')
+        if result:
+            return result.decode('utf-8')
+        result = method(url)
+        redis_store.set(f'count:{url}', 0)
+        redis_store.setex(f'result:{url}', 10, result)
+        return result
     return wrapper
 
 
