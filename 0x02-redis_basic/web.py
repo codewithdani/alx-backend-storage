@@ -13,7 +13,7 @@ def count_url_access(method: Callable) -> Callable:
     """ Decorator counting how many times
     a URL is accessed """
     @wraps(method)
-    def wrapper(url: str, *args, **kwargs):
+    def wrapper(url: str, *args, **kwargs) -> str:
         """ Generate keys for count and cache """
         count_key = f"count:{url}"
         cache_key = f"cache:{url}"
