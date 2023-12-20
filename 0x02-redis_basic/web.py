@@ -7,7 +7,7 @@ from functools import wraps
 redis_client = redis.Redis()
 
 
-def count_url_access(method):
+def count_url_access(method: Callable) -> Callable:
     """ Decorator counting how many times
     a URL is accessed """
     @wraps(method)
