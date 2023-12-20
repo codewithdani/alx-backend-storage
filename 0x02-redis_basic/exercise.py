@@ -28,8 +28,8 @@ class Cache:
 
     def get_str(self, key: str) -> str:
         """ Convenience method for getting a string """
-        value = self._redis.get(key)
-        return value.decode("utf-8")
+        data = self._redis.get(key)
+        return data.decode("utf-8")
 
     def get_int(self, key: str) -> int:
         """ Convenience method for getting an integer """
