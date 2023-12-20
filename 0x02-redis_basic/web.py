@@ -46,7 +46,8 @@ def get_page(url: str) -> str:
 
 if __name__ == "__main__":
     # Example usage:
-    url = "http://slowwly.robertomurray.co.uk/delay/5000/url/http://www.example.com"
+    url = ("http://slowwly.robertomurray.co.uk/delay/"
+           " 5000/url/http://www.example.com")
     page_content = get_page(url)
     print(page_content)
 
