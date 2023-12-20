@@ -3,6 +3,7 @@
 import requests
 import redis
 from functools import wraps
+from typing import Callable
 
 redis_client = redis.Redis()
 
