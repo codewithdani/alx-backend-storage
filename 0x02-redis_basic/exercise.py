@@ -2,7 +2,7 @@
 """ Cache class in Python using the redis library: """
 from uuid import uuid4
 import redis
-from typing import Union, Callable
+from typing import Union, Callable, Optional
 
 
 class Cache:
